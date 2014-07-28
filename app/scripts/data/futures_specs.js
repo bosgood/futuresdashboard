@@ -1,6 +1,9 @@
 var futuresSpecs = {
   "products": [
     {
+      "id": "CL",
+      "nicknames": ["Crude"],
+      "shortDescription": "Crude Oil Futures",
       "tickerSymbol": "/CL",
       "minimumFluctuation": {
         "format": "decimal",
@@ -41,6 +44,9 @@ var futuresSpecs = {
       }
     },
     {
+      "id": "ZB",
+      "nicknames": ["Bonds"],
+      "shortDescription": "30-Year US Treasury Bond Futures",
       "tickerSymbol": "/ZB",
       "minimumFluctuation": {
         "format": "1/32",
