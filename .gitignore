@@ -1,0 +1,7 @@
+.DS_Store
+node_modules/
+.ruby-version
+.editorconfig
+dist/
+.sass-cache/
+*bower_components/
