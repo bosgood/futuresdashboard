@@ -5,11 +5,11 @@ var FuturesSpec = React.createClass({
     return (
       <div>
         <dt>Symbol</dt>
-        <dd>{this.props.tickerSymbol}</dd>
+        <dd>{this.props.product.tickerSymbol}</dd>
         <dt>Multiplier</dt>
-        <dd>{this.props.multiplier}</dd>
+        <dd>{this.props.product.multiplier}</dd>
         <dt>Minimum Fluctuation</dt>
-        <dd>{this.props.fluctuation}</dd>
+        <dd>{this.props.product.fluctuation}</dd>
       </div>
     );
   }

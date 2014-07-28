@@ -7,14 +7,27 @@ var React = window.React = require('react'),
   ProductSelection = require('./ui/ProductSelection'),
   Calendar = require('./ui/Calendar'),
   futuresSpecs = require('./data/futures_specs'),
-  defaultProduct = futuresSpecs.products[0];
+  specIndex = {};
+
+futuresSpecs.products.forEach(function(spec) {
+  specIndex[spec.id] = spec;
+});
 
 var DashboardApp = React.createClass({
+  getInitialState: function() {
+    return {
+      products: futuresSpecs.products,
+      selectedProduct: futuresSpecs.products[0],
+    };
+  },
+  onProductChanged: function(productId) {
+    this.setState({ selectedProduct: specIndex[productId] });
+  },
   render: function() {
     return (
       <div>
-        <ProductSelection items={futuresSpecs.products} />
-        <FuturesSpec />
+        <ProductSelection items={this.state.products} onChange={this.onProductChanged} />
+        <FuturesSpec product={this.state.selectedProduct} />
         <PriceCalculator />
         <Calendar />
       </div>
