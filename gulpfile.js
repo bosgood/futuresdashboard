@@ -1,9 +1,11 @@
 'use strict';
 
 var gulp = require('gulp');
-
-// Load plugins
 var $ = require('gulp-load-plugins')();
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
+var es6ify = require('es6ify');
+var reactify = require('reactify');
 
 // Styles
 gulp.task('styles', function() {
@@ -33,13 +35,15 @@ gulp.task('coffee', function() {
 
 // Scripts
 gulp.task('scripts', function() {
-  return gulp.src('app/scripts/app.js')
-    .pipe($.browserify({
-      insertGlobals: true,
-      transform: ['reactify']
-    }))
+  return browserify({ debug: true })
+    .add(es6ify.runtime)
+    .add('./app/scripts/app.js')
+    .transform(reactify)
+    .transform(es6ify)
+    .bundle()
+    .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist/scripts'))
-    .pipe($.size())
+    // .pipe($.size())
     .pipe($.connect.reload());
   });
 
