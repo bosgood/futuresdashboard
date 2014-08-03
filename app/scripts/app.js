@@ -3,9 +3,7 @@
 var React = window.React = require('react'),
   mountNode = document.getElementById('app'),
   FuturesSpec = require('./ui/FuturesSpec'),
-  PriceCalculator = require('./ui/PriceCalculator'),
   ProductSelection = require('./ui/ProductSelection'),
-  Calendar = require('./ui/Calendar'),
   futuresSpecs = require('./data/futures_specs'),
   specIndex = {};
 
@@ -30,8 +28,6 @@ var DashboardApp = React.createClass({
     return (
       <div>
         <ProductSelection items={this.state.products} onChange={this.onProductChanged} meta={this.getMeta()} />
-        <PriceCalculator meta={this.getMeta()} />
-        <Calendar meta={this.getMeta()} />
       </div>
     );
   }

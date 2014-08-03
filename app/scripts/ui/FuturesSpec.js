@@ -1,5 +1,8 @@
 /** @jsx React.DOM */
 
+var PriceCalculator = require('./PriceCalculator'),
+  Calendar = require('./Calendar');
+
 var FuturesSpec = React.createClass({
   handleClick: function() {
     this.props.onClick(
@@ -30,6 +33,9 @@ var FuturesSpec = React.createClass({
             <dt>Minimum Fluctuation</dt>
             <dd>{this.props.product.fluctuation}</dd>
           </section>
+
+          <PriceCalculator meta={this.props.meta} />
+          <Calendar meta={this.props.meta} />
         </div>
       );
     }
