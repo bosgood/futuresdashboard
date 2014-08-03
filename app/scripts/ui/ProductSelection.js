@@ -1,17 +1,25 @@
 /** @jsx React.DOM */
 
+var FuturesSpec = require('./FuturesSpec');
+
 var ProductSelection = React.createClass({
   createItem: function(data) {
-    return <option value={data.id}>{data.tickerSymbol} - {data.shortDescription}</option>;
+    return (
+      <FuturesSpec
+        key={data.id}
+        product={data}
+        meta={this.props.meta}
+        onClick={this.handleClick.bind(this, data)} />
+    );
   },
-  onChange: function(e) {
-    this.props.onChange(e.target.value);
+  handleClick: function(data) {
+    this.props.onChange(data);
   },
   render: function() {
     return (
-      <select ref="selectList" onChange={this.onChange}>
+      <div>
         {this.props.items.map(this.createItem)}
-      </select>
+      </div>
     );
   }
 });

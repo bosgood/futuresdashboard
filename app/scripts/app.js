@@ -20,14 +20,13 @@ var DashboardApp = React.createClass({
       selectedProduct: futuresSpecs.products[0],
     };
   },
-  onProductChanged: function(productId) {
-    this.setState({ selectedProduct: specIndex[productId] });
+  onProductChanged: function(product) {
+    this.setState({ selectedProduct: product });
   },
   render: function() {
     return (
       <div>
-        <ProductSelection items={this.state.products} onChange={this.onProductChanged} />
-        <FuturesSpec product={this.state.selectedProduct} />
+        <ProductSelection items={this.state.products} onChange={this.onProductChanged} meta={{selectedProduct: this.state.selectedProduct}} />
         <PriceCalculator />
         <Calendar />
       </div>
