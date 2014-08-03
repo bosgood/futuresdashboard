@@ -23,12 +23,15 @@ var DashboardApp = React.createClass({
   onProductChanged: function(product) {
     this.setState({ selectedProduct: product });
   },
+  getMeta: function() {
+    return { selectedProduct: this.state.selectedProduct };
+  },
   render: function() {
     return (
       <div>
-        <ProductSelection items={this.state.products} onChange={this.onProductChanged} meta={{selectedProduct: this.state.selectedProduct}} />
-        <PriceCalculator />
-        <Calendar />
+        <ProductSelection items={this.state.products} onChange={this.onProductChanged} meta={this.getMeta()} />
+        <PriceCalculator meta={this.getMeta()} />
+        <Calendar meta={this.getMeta()} />
       </div>
     );
   }
