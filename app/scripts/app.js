@@ -17,7 +17,7 @@ var DashboardApp = React.createClass({
   getInitialState: function() {
     return {
       products: futuresSpecs.products,
-      selectedProduct: futuresSpecs.products[0],
+      selectedProduct: null,
     };
   },
   onProductChanged: function(product) {

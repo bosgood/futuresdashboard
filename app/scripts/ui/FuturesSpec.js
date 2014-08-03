@@ -2,22 +2,29 @@
 
 var FuturesSpec = React.createClass({
   handleClick: function() {
-    this.props.onClick(this.props.product);
+    this.props.onClick(
+      this.isSelectedProduct() ? null : this.props.product
+    );
+  },
+  isSelectedProduct: function() {
+    return this.props.meta.selectedProduct === this.props.product;
   },
   render: function() {
-    if (this.props.meta.selectedProduct !== this.props.product) {
+    if (!this.isSelectedProduct()) {
       return (
-        <div onClick={this.handleClick}>
-          <h1>{this.props.product.tickerSymbol}</h1>
+        <div className="futures-spec" onClick={this.handleClick}>
+          <header className="futures-spec-header">
+            <h1>{this.props.product.tickerSymbol}</h1>
+          </header>
         </div>
       );
     } else {
       return (
-        <div class="futures-spec" onClick={this.handleClick}>
-          <header class="futures-spec-header">
+        <div className="futures-spec" onClick={this.handleClick}>
+          <header className="futures-spec-header">
             <h1>{this.props.product.tickerSymbol}</h1>
           </header>
-          <section class="futures-spec-details">
+          <section className="futures-spec-details">
             <dt>Multiplier</dt>
             <dd>{this.props.product.multiplier}</dd>
             <dt>Minimum Fluctuation</dt>

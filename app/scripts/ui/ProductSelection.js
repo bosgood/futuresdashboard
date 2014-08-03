@@ -9,7 +9,7 @@ var ProductSelection = React.createClass({
         key={data.id}
         product={data}
         meta={this.props.meta}
-        onClick={this.handleClick.bind(this, data)} />
+        onClick={this.handleClick} />
     );
   },
   handleClick: function(data) {
