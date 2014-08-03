@@ -2,9 +2,12 @@
 
 var Calendar = React.createClass({
   render: function() {
+    if (!this.props.meta.selectedProduct) {
+      return <div></div>;
+    }
+
     return (
       <div>
-        Calendar
       </div>
     );
   }
