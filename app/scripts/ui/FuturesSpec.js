@@ -43,10 +43,17 @@ var FuturesSpec = React.createClass({
             <h1>{product.tickerSymbol}</h1>
           </header>
           <dl className="futures-spec-details dl-horizontal">
+            <dt className="text-muted">Description</dt>
+            <dd>{product.shortDescription}</dd>
             <dt className="text-muted">Multiplier</dt>
             <dd>{product.multiplier}</dd>
             <dt className="text-muted">Minimum Fluctuation</dt>
             <dd>{minimumFluctuationValue} (${minimumFluctuationDollarValue})</dd>
+            <dt className="text-muted">Settlement Type</dt>
+            <dd>{product.settlementType}</dd>
+            <dt className="text-muted">Contract Unit</dt>
+            <dd>{product.contractUnit}</dd>
+
           </dl>
 
           <PriceCalculator meta={this.props.meta} />

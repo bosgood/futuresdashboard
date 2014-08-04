@@ -91,13 +91,14 @@ body {
 }
 
 .futures-spec {
-  // display: inline-block;
   margin: 20px;
+  padding: 0 10px 10px 10px;
   position: relative;
   vertical-align: top;
   text-align: left;
 
   &.selected {
+    background-color: white;
     display: block;
     // height: 300px;
 
@@ -117,6 +118,7 @@ body {
 }
 
 .futures-spec-details {
+  margin-top: 50px;
   vertical-align: top;
 
   > dt {
@@ -130,8 +132,9 @@ body {
 
 .price-calculator {
   display: inline-block;
-  vertical-align: top;
   position: absolute;
-  right: 0;
+  text-align: right;
   top: 0;
+  right: 10px;
+  vertical-align: top;
 }
