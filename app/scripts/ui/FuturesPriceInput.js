@@ -13,12 +13,15 @@ var FuturesPriceInput = React.createClass({
     return "\d\d'\d\d";
   },
   getPlaceholder: function() {
-    var product = this.props.meta.selectedProduct;
-    var placeholderPrefix = 'price, e.g. ';
+    var product = this.props.meta.selectedProduct,
+      placeholderPrefix = 'price, e.g. ',
+      valueString;
+
     if (product.priceFormat !== 'ticks') {
-      return `${placeholderPrefix} 100.00`;
+      valueString = '100.00';
     }
-    return `${placeholderPrefix} 100'00`;
+    valueString = "100'00";
+    return `${placeholderPrefix} ${valueString}`;
   },
   render: function() {
     return (
