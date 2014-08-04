@@ -23,8 +23,11 @@ var FuturesSpec = React.createClass({
       );
     } else {
       return (
-        <div className="futures-spec" onClick={this.handleClick}>
-          <header className="futures-spec-header">
+        <div className="futures-spec">
+          <header
+            className="futures-spec-header"
+            onClick={this.handleClick}
+          >
             <h1>{this.props.product.tickerSymbol}</h1>
           </header>
           <section className="futures-spec-details">
