@@ -5,10 +5,9 @@ var futuresSpecs = {
       "nicknames": ["Crude"],
       "shortDescription": "Crude Oil Futures",
       "tickerSymbol": "/CL",
-      "minimumFluctuation": {
-        "format": "decimal",
-        "value": 0.01
-      },
+      "priceFormat": "decimal",
+      "ticksFormat": null,
+      "minimumFluctuation": 0.01,
       "multiplier": 1000,
       "settlementType": "Physical",
       "contractUnit": "1,000 barrels",
@@ -48,10 +47,9 @@ var futuresSpecs = {
       "nicknames": ["Bonds"],
       "shortDescription": "30-Year US Treasury Bond Futures",
       "tickerSymbol": "/ZB",
-      "minimumFluctuation": {
-        "format": "1/32",
-        "value": "1/32"
-      },
+      "priceFormat": "ticks",
+      "ticksFormat": "1/32",
+      "minimumFluctuation": 0.03125,
       "multiplier": 1000,
       "settlementType": "Federal Reserve book-entry wire-transfer system.",
       "contractUnit": "One U.S. Treasury bond having a face value at maturity of $100,000.",
