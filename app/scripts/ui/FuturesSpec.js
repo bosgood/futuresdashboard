@@ -35,19 +35,19 @@ var FuturesSpec = React.createClass({
       }
 
       return (
-        <div className="futures-spec">
+        <div className="futures-spec selected">
           <header
             className="futures-spec-header"
             onClick={this.handleClick}
           >
             <h1>{product.tickerSymbol}</h1>
           </header>
-          <section className="futures-spec-details">
-            <dt>Multiplier</dt>
+          <dl className="futures-spec-details dl-horizontal">
+            <dt className="text-muted">Multiplier</dt>
             <dd>{product.multiplier}</dd>
-            <dt>Minimum Fluctuation</dt>
+            <dt className="text-muted">Minimum Fluctuation</dt>
             <dd>{minimumFluctuationValue} (${minimumFluctuationDollarValue})</dd>
-          </section>
+          </dl>
 
           <PriceCalculator meta={this.props.meta} />
           <Calendar meta={this.props.meta} />

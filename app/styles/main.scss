@@ -89,3 +89,49 @@ body {
     border-bottom: 0;
   }
 }
+
+.futures-spec {
+  // display: inline-block;
+  margin: 20px;
+  position: relative;
+  vertical-align: top;
+  text-align: left;
+
+  &.selected {
+    display: block;
+    // height: 300px;
+
+    > .futures-spec-header {
+    }
+  }
+}
+
+.futures-spec-header {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    color: rgb(66, 139, 202);
+  }
+}
+
+.futures-spec-details {
+  vertical-align: top;
+
+  > dt {
+    text-align: left;
+    text-transform: lowercase;
+  }
+
+  // > dd {
+  // }
+}
+
+.price-calculator {
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
