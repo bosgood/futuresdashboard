@@ -14,18 +14,25 @@ var FuturesSpec = React.createClass({
     return this.props.meta.selectedProduct === this.props.product;
   },
   render: function() {
+    var product = this.props.product;
     if (!this.isSelectedProduct()) {
       return (
         <div className="futures-spec" onClick={this.handleClick}>
           <header className="futures-spec-header">
-            <h1>{this.props.product.tickerSymbol}</h1>
+            <h1>{product.tickerSymbol}</h1>
           </header>
         </div>
       );
     } else {
-      var minimumFluctuationValue = PriceUtils.getActualValue(
-        this.props.product, this.props.product.minimumFluctuation
+      var minimumFluctuationDollarValue = PriceUtils.getActualValue(
+        product, product.minimumFluctuation
       );
+      var minimumFluctuationValue = product.minimumFluctuation;
+      if (product.priceFormat !== 'decimal') {
+        minimumFluctuationValue = PriceUtils.convertDecimalToTicks(
+          product, product.minimumFluctuation
+        );
+      }
 
       return (
         <div className="futures-spec">
@@ -33,13 +40,13 @@ var FuturesSpec = React.createClass({
             className="futures-spec-header"
             onClick={this.handleClick}
           >
-            <h1>{this.props.product.tickerSymbol}</h1>
+            <h1>{product.tickerSymbol}</h1>
           </header>
           <section className="futures-spec-details">
             <dt>Multiplier</dt>
-            <dd>{this.props.product.multiplier}</dd>
+            <dd>{product.multiplier}</dd>
             <dt>Minimum Fluctuation</dt>
-            <dd>{this.props.product.minimumFluctuation} (${minimumFluctuationValue})</dd>
+            <dd>{minimumFluctuationValue} (${minimumFluctuationDollarValue})</dd>
           </section>
 
           <PriceCalculator meta={this.props.meta} />
