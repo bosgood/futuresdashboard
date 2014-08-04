@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+var FuturesPriceInput = require('./FuturesPriceInput');
+
 var PriceCalculator = React.createClass({
   getInitialState: function() {
     return { outputValue: 0 };
@@ -7,9 +9,9 @@ var PriceCalculator = React.createClass({
   getResult: function(inputValue) {
     return inputValue * this.props.meta.selectedProduct.multiplier;
   },
-  handleChange: function(e) {
+  handleChange: function(value) {
     this.setState({
-      outputValue: this.getResult(e.target.value)
+      outputValue: this.getResult(value)
     });
   },
   render: function() {
@@ -22,7 +24,7 @@ var PriceCalculator = React.createClass({
         <header className="price-calculator-header">
           <h2>Pricing</h2>
         </header>
-        <input type="text" defaultValue={0} onChange={this.handleChange} />
+        <FuturesPriceInput meta={this.props.meta} onChange={this.handleChange} />
         <section className="price-calculator-explanation">
           Input * Multiplier = Actual Value
         </section>

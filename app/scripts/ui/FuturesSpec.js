@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 
 var PriceCalculator = require('./PriceCalculator'),
-  Calendar = require('./Calendar');
+  Calendar = require('./Calendar'),
+  PriceUtils = require('../helpers/prices');
 
 var FuturesSpec = React.createClass({
   handleClick: function() {
@@ -22,6 +23,10 @@ var FuturesSpec = React.createClass({
         </div>
       );
     } else {
+      var minimumFluctuationValue = PriceUtils.getActualValue(
+        this.props.product, this.props.product.minimumFluctuation
+      );
+
       return (
         <div className="futures-spec">
           <header
@@ -34,7 +39,7 @@ var FuturesSpec = React.createClass({
             <dt>Multiplier</dt>
             <dd>{this.props.product.multiplier}</dd>
             <dt>Minimum Fluctuation</dt>
-            <dd>{this.props.product.fluctuation}</dd>
+            <dd>{this.props.product.minimumFluctuation} (${minimumFluctuationValue})</dd>
           </section>
 
           <PriceCalculator meta={this.props.meta} />
