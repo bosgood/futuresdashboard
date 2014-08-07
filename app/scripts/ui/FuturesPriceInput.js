@@ -1,18 +1,20 @@
 /** @jsx React.DOM */
 
-var FuturesPriceInput = React.createClass({
-  handleChange: function(e) {
+class FuturesPriceInput {
+  handleChange(e) {
     typeof this.props.onChange === 'function' && this.props.onChange(e.target.value);
-  },
-  getInputPattern: function() {
+  }
+
+  getInputPattern() {
     var product = this.props.meta.selectedProduct;
     if (product.priceFormat !== 'ticks') {
       return null;
     }
 
     return "\d\d'\d\d";
-  },
-  getPlaceholder: function() {
+  }
+
+  getPlaceholder() {
     var product = this.props.meta.selectedProduct,
       placeholderPrefix = 'price, e.g. ',
       valueString;
@@ -22,8 +24,9 @@ var FuturesPriceInput = React.createClass({
     }
     valueString = "100'00";
     return `${placeholderPrefix} ${valueString}`;
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <input
         type="text"
@@ -32,6 +35,6 @@ var FuturesPriceInput = React.createClass({
         onChange={this.handleChange} />
     );
   }
-});
+}
 
-module.exports = FuturesPriceInput;
+module.exports = React.createClass(FuturesPriceInput.prototype);

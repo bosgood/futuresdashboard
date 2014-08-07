@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var Calendar = React.createClass({
-  render: function() {
+class Calendar {
+  render() {
     if (!this.props.meta.selectedProduct) {
       return <div></div>;
     }
@@ -11,6 +11,6 @@ var Calendar = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = Calendar;
+module.exports = React.createClass(Calendar.prototype);

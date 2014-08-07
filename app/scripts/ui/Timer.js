@@ -1,24 +1,27 @@
 /** @jsx React.DOM */
 
-var Timer = React.createClass({
-  getInitialState: function() {
+class Timer {
+  getInitialState() {
     return {secondsElapsed: 0};
-  },
-  tick: function() {
+  }
+
+  tick() {
     this.setState({secondsElapsed: this.state.secondsElapsed + 1});
-  },
-  componentDidMount: function() {
+  }
+
+  componentDidMount() {
     this.interval = setInterval(this.tick, 1000);
-  },
-  componentWillUnmount: function() {
+  }
+
+  componentWillUnmount() {
     clearInterval(this.interval);
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>Seconds Elapsed: {this.state.secondsElapsed}</div>
     );
   }
-});
+}
 
-
-module.exports = Timer;
+module.exports = React.createClass(Timer.prototype);

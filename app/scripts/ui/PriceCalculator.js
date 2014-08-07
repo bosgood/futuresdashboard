@@ -2,19 +2,22 @@
 
 var FuturesPriceInput = require('./FuturesPriceInput');
 
-var PriceCalculator = React.createClass({
-  getInitialState: function() {
+class PriceCalculator {
+  getInitialState() {
     return { outputValue: 0 };
-  },
-  getResult: function(inputValue) {
+  }
+
+  getResult(inputValue) {
     return inputValue * this.props.meta.selectedProduct.multiplier;
-  },
-  handleChange: function(value) {
+  }
+
+  handleChange(value) {
     this.setState({
       outputValue: this.getResult(value)
     });
-  },
-  render: function() {
+  }
+
+  render() {
     if (!this.props.meta.selectedProduct) {
       return <div></div>;
     }
@@ -34,6 +37,6 @@ var PriceCalculator = React.createClass({
       </div>
     );
   }
-});
+}
 
-module.exports = PriceCalculator;
+module.exports = React.createClass(PriceCalculator.prototype);

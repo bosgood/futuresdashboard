@@ -4,16 +4,18 @@ var PriceCalculator = require('./PriceCalculator'),
   Calendar = require('./Calendar'),
   PriceUtils = require('../helpers/prices');
 
-var FuturesSpec = React.createClass({
-  handleClick: function() {
+class FuturesSpec {
+  handleClick() {
     this.props.onClick(
       this.isSelectedProduct() ? null : this.props.product
     );
-  },
-  isSelectedProduct: function() {
+  }
+
+  isSelectedProduct() {
     return this.props.meta.selectedProduct === this.props.product;
-  },
-  render: function() {
+  }
+
+  render() {
     var product = this.props.product;
     if (!this.isSelectedProduct()) {
       return (
@@ -62,6 +64,6 @@ var FuturesSpec = React.createClass({
       );
     }
   }
-});
+}
 
-module.exports = FuturesSpec;
+module.exports = React.createClass(FuturesSpec.prototype);
