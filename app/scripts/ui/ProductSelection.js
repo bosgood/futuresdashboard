@@ -2,8 +2,8 @@
 
 var FuturesSpec = require('./FuturesSpec');
 
-var ProductSelection = React.createClass({
-  createItem: function(data) {
+class ProductSelection {
+  createItem(data) {
     return (
       <FuturesSpec
         key={data.id}
@@ -11,17 +11,19 @@ var ProductSelection = React.createClass({
         meta={this.props.meta}
         onClick={this.handleClick} />
     );
-  },
-  handleClick: function(data) {
+  }
+
+  handleClick(data) {
     this.props.onChange(data);
-  },
-  render: function() {
+  }
+
+  render() {
     return (
       <div>
         {this.props.items.map(this.createItem)}
       </div>
     );
   }
-});
+}
 
-module.exports = ProductSelection;
+module.exports = React.createClass(ProductSelection.prototype);
