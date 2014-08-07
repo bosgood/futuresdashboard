@@ -19,7 +19,7 @@ class FuturesSpec {
     var product = this.props.product;
     if (!this.isSelectedProduct()) {
       return (
-        <div className="futures-spec" onClick={this.handleClick}>
+        <div className="futures-spec collapsed" onClick={this.handleClick}>
           <header className="futures-spec-header">
             <h1>{product.tickerSymbol}</h1>
           </header>
