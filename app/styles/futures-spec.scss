@@ -1,0 +1,39 @@
+.futures-spec {
+  margin: 20px;
+  padding: 0 10px 10px 10px;
+  position: relative;
+  vertical-align: top;
+  text-align: left;
+
+  &.selected {
+    background-color: white;
+    display: block;
+    // height: 300px;
+
+    > .futures-spec-header {
+    }
+  }
+}
+
+.futures-spec-header {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+
+  &:hover {
+    color: rgb(66, 139, 202);
+  }
+}
+
+.futures-spec-details {
+  margin-top: 50px;
+  vertical-align: top;
+
+  > dt {
+    text-align: left;
+    text-transform: lowercase;
+  }
+
+  // > dd {
+  // }
+}

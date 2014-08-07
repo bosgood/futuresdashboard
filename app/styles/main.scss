@@ -1,6 +1,8 @@
-$icon-font-path: "/bower_components/bootstrap-sass-official/vender/assets/fonts/";
+$icon-font-path: "/bower_components/bootstrap-sass-official/assets/fonts/bootstrap";
 
 @import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "./futures-spec";
+@import "./price-calculator";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -36,9 +38,13 @@ body {
     padding-bottom: 19px;
 
     > small {
-      margin-left: 20px;
+      margin-left: 5px;
     }
   }
+}
+
+.nav-pills > li > a {
+  border-radius: 0;
 }
 
 /* Custom page footer */
@@ -64,6 +70,7 @@ body {
 }
 
 .container .jumbotron {
+  border-radius: 0;
   padding: 10px;
 }
 
@@ -98,53 +105,4 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
-}
-
-.futures-spec {
-  margin: 20px;
-  padding: 0 10px 10px 10px;
-  position: relative;
-  vertical-align: top;
-  text-align: left;
-
-  &.selected {
-    background-color: white;
-    display: block;
-    // height: 300px;
-
-    > .futures-spec-header {
-    }
-  }
-}
-
-.futures-spec-header {
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: top;
-
-  &:hover {
-    color: rgb(66, 139, 202);
-  }
-}
-
-.futures-spec-details {
-  margin-top: 50px;
-  vertical-align: top;
-
-  > dt {
-    text-align: left;
-    text-transform: lowercase;
-  }
-
-  // > dd {
-  // }
-}
-
-.price-calculator {
-  display: inline-block;
-  position: absolute;
-  text-align: right;
-  top: 0;
-  right: 10px;
-  vertical-align: top;
 }
