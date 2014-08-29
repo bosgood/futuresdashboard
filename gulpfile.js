@@ -8,6 +8,8 @@ var es6ify      = require('es6ify');
 var reactify    = require('reactify');
 var nconf       = require('nconf');
 var runSequence = require('run-sequence');
+var s3          = require('gulp-s3');
+var depot       = require('gulp-depot');
 
 // Styles
 gulp.task('styles', function() {
@@ -157,4 +159,17 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function() {
 
   // Watch image files
   gulp.watch('app/images/**/*', ['images']);
+});
+
+
+gulp.task('s3', function() {
+
+});
+
+gulp.task('depot', function() {
+
+});
+
+gulp.task('deploy', function() {
+
 });
