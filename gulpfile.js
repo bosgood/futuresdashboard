@@ -8,8 +8,6 @@ var es6ify      = require('es6ify');
 var reactify    = require('reactify');
 var nconf       = require('nconf');
 var runSequence = require('run-sequence');
-var s3          = require('gulp-s3');
-var depot       = require('gulp-depot');
 var chalk       = require('chalk');
 var path        = require('path');
 
@@ -25,18 +23,6 @@ gulp.task('styles', function() {
   .pipe(gulp.dest('dist/styles'))
   .pipe($.size())
   .pipe($.connect.reload());
-});
-
-// CoffeeScript
-gulp.task('coffee', function() {
-  return gulp.src(
-    ['app/scripts/**/*.coffee', '!app/scripts/**/*.js'],
-    {base: 'app/scripts'}
-  )
-  .pipe(
-    $.coffee({ bare: true }).on('error', $.util.log)
-  )
-  .pipe(gulp.dest('app/scripts'));
 });
 
 // Scripts
@@ -153,9 +139,6 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function() {
   // Watch .jade files
   gulp.watch('app/template/**/*.jade', ['jade', 'html']);
 
-  // Watch .coffeescript files
-  gulp.watch('app/scripts/**/*.coffee', ['coffee', 'scripts']);
-
   // Watch .js files
   gulp.watch('app/scripts/**/*.js', ['scripts']);
 
@@ -187,7 +170,7 @@ gulp.task('s3', function() {
     'dist/styles/**/*',
     'dist/index.html'
     ])
-    .pipe(s3(connectionOpts, opts))
+    .pipe($.s3(connectionOpts, opts))
   ;
 });
 
@@ -197,7 +180,7 @@ gulp.task('depot', function() {
   var opts = nconf.get('depot');
 
   return gulp.src('dist/index.html')
-    .pipe(depot(opts))
+    .pipe($.depot(opts))
     .on('error', function(err) {
       console.error(chalk.red('[depot]' + err));
     })
