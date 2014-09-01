@@ -183,7 +183,8 @@ gulp.task('s3', function() {
   });
 
   return gulp.src([
-    'dist/scripts/**/*', 'dist/styles/**/*',
+    'dist/scripts/**/*',
+    'dist/styles/**/*',
     'dist/index.html'
     ])
     .pipe(s3(connectionOpts, opts))
@@ -202,14 +203,16 @@ gulp.task('depot', function() {
     })
     .on('data', function(data) {
       console.log(chalk.blue('[depot]' + data));
-    });
+    })
+  ;
 });
 
-gulp.task('deploy', function() {
+gulp.task('deploy', function(callback) {
   return runSequence(
     'check-env',
     'build',
-    ['s3', 'depot']
+    ['s3', 'depot'],
+    callback
   );
 });
 
