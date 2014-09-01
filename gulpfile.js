@@ -10,6 +10,8 @@ var nconf       = require('nconf');
 var runSequence = require('run-sequence');
 var s3          = require('gulp-s3');
 var depot       = require('gulp-depot');
+var chalk       = require('chalk');
+var path        = require('path');
 
 // Styles
 gulp.task('styles', function() {
@@ -96,9 +98,9 @@ gulp.task('clean', function() {
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
   return gulp.src('./app/*.html')
-    .pipe($.useref.assets())
-    .pipe($.rev())
-    .pipe($.useref.restore())
+    // .pipe($.useref.assets())
+    // .pipe($.rev())
+    // .pipe($.useref.restore())
     .pipe($.useref())
     .pipe($.revReplace())
     .pipe(gulp.dest('dist'))
@@ -161,15 +163,69 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function() {
   gulp.watch('app/images/**/*', ['images']);
 });
 
-
-gulp.task('s3', function() {
-
+gulp.task('check-env', function() {
+  if (ENV === 'dev') {
+    exitWithError('cannot deploy into the `dev` environment.');
+  }
 });
 
-gulp.task('depot', function() {
+// Upload built assets to S3
+gulp.task('s3', function() {
+  ensureConfigLoaded();
+  var opts = nconf.get('s3');
+  var connectionOpts = {};
+  var s3Keys = ['key', 'secret', 'bucket', 'region'];
 
+  // Divide connection-specific and general options
+  s3Keys.forEach(function(key) {
+    connectionOpts[key] = opts[key];
+    delete opts[key];
+  });
+
+  return gulp.src([
+    'dist/scripts/**/*', 'dist/styles/**/*',
+    'dist/index.html'
+    ])
+    .pipe(s3(connectionOpts, opts))
+  ;
+});
+
+// Deploy the index.html to depot
+gulp.task('depot', function() {
+  ensureConfigLoaded();
+  var opts = nconf.get('depot');
+
+  return gulp.src('dist/index.html')
+    .pipe(depot(opts))
+    .on('error', function(err) {
+      console.error(chalk.red('[depot]' + err));
+    })
+    .on('data', function(data) {
+      console.log(chalk.blue('[depot]' + data));
+    });
 });
 
 gulp.task('deploy', function() {
-
+  return runSequence(
+    'check-env',
+    'build',
+    ['s3', 'depot']
+  );
 });
+
+nconf.argv().env();
+var configLoaded = false;
+var ENV = nconf.get('ENV') || 'dev';
+
+function ensureConfigLoaded() {
+  if (configLoaded) {
+    return;
+  }
+  nconf.file(path.join('deploy', ENV + '.json'));
+  configLoaded = true;
+}
+
+function exitWithError(errorMessage) {
+  console.error(chalk.red(errorMessage));
+  throw new Error(errorMessage);
+}
