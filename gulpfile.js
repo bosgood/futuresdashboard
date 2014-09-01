@@ -10,6 +10,7 @@ var nconf       = require('nconf');
 var runSequence = require('run-sequence');
 var chalk       = require('chalk');
 var path        = require('path');
+var debowerify  = require('debowerify');
 
 // Styles
 gulp.task('styles', function() {
@@ -31,6 +32,7 @@ gulp.task('scripts', function() {
     .add('./app/scripts/app.js')
     .transform(reactify)
     .transform(es6ify)
+    .transform(debowerify)
     .bundle()
     .on('error', function(err) {
       $.util.log($.util.colors.red(err.message));

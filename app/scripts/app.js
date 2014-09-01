@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
-var React = window.React = require('react'),
+var $ = require('jquery'),
+  React = window.React = require('react'),
   mountNode = document.getElementById('app'),
   FuturesSpec = require('./ui/FuturesSpec'),
   ProductSelection = require('./ui/ProductSelection'),
