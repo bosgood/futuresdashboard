@@ -55,7 +55,6 @@ gulp.task('jade', function() {
 // HTML
 gulp.task('html', function() {
   return gulp.src('app/*.html')
-    .pipe($.useref())
     .pipe(gulp.dest('dist'))
     .pipe($.connect.reload())
   ;
@@ -84,12 +83,9 @@ gulp.task('clean', function() {
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function() {
+gulp.task('bundle', ['styles', 'scripts'], function() {
   return gulp.src('./app/*.html')
-    // .pipe($.useref.assets())
-    // .pipe($.rev())
-    // .pipe($.useref.restore())
-    .pipe($.useref())
+    .pipe($.rev())
     .pipe($.revReplace())
     .pipe(gulp.dest('dist'))
   ;
@@ -128,7 +124,7 @@ gulp.task('json', function() {
 });
 
 // Watch
-gulp.task('watch', ['html', 'bundle', 'connect'], function() {
+gulp.task('watch', ['build', 'connect'], function() {
   // Watch .json files
   gulp.watch('app/scripts/**/*.json', ['json']);
 
