@@ -21,7 +21,6 @@ gulp.task('styles', function() {
   }))
   .pipe($.autoprefixer('last 1 version'))
   .pipe(gulp.dest('dist/styles'))
-  .pipe($.size())
   .pipe($.connect.reload());
 });
 
@@ -33,9 +32,12 @@ gulp.task('scripts', function() {
     .transform(reactify)
     .transform(es6ify)
     .bundle()
+    .on('error', function(err) {
+      $.util.log($.util.colors.red(err.message));
+      $.util.beep();
+    })
     .pipe(source('bundle.js'))
     .pipe(gulp.dest('dist/scripts'))
-    // .pipe($.size())
     .pipe($.connect.reload())
   ;
 });
@@ -53,7 +55,6 @@ gulp.task('html', function() {
   return gulp.src('app/*.html')
     .pipe($.useref())
     .pipe(gulp.dest('dist'))
-    .pipe($.size())
     .pipe($.connect.reload())
   ;
 });
@@ -67,7 +68,6 @@ gulp.task('images', function() {
       interlaced: true
     })))
     .pipe(gulp.dest('dist/images'))
-    .pipe($.size())
     .pipe($.connect.reload())
   ;
 });
@@ -148,7 +148,7 @@ gulp.task('watch', ['html', 'bundle', 'connect'], function() {
 
 gulp.task('check-env', function() {
   if (ENV === 'dev') {
-    exitWithError('cannot deploy into the `dev` environment.');
+    onError('cannot deploy into the `dev` environment.');
   }
 });
 
@@ -203,15 +203,15 @@ nconf.argv().env();
 var configLoaded = false;
 var ENV = nconf.get('ENV') || 'dev';
 
+function onError(err) {
+  var err = (err && err.message) || err;
+  $.util.log($.util.colors.red(err));
+}
+
 function ensureConfigLoaded() {
   if (configLoaded) {
     return;
   }
   nconf.file(path.join('deploy', ENV + '.json'));
   configLoaded = true;
-}
-
-function exitWithError(errorMessage) {
-  console.error(chalk.red(errorMessage));
-  throw new Error(errorMessage);
 }
