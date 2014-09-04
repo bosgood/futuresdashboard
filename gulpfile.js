@@ -146,7 +146,7 @@ gulp.task('watch', ['build', 'connect'], function() {
 
 gulp.task('check-env', function() {
   if (ENV === 'dev') {
-    onError('cannot deploy into the `dev` environment.');
+    onError('cannot deploy into the `dev` environment.', true);
   }
 });
 
@@ -201,9 +201,12 @@ nconf.argv().env();
 var configLoaded = false;
 var ENV = nconf.get('ENV') || 'dev';
 
-function onError(err) {
+function onError(err, quit) {
   var err = (err && err.message) || err;
   $.util.log($.util.colors.red(err));
+  if (quit) {
+    throw new Error(err);
+  }
 }
 
 function ensureConfigLoaded() {
